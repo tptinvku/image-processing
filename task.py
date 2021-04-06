@@ -10,6 +10,11 @@ class Task:
         self.src = cv.imread(cv.samples.findFile(self.imageName), cv.IMREAD_COLOR)
         self.ddepth = -1
 
+        if self.src is None:
+            print('Error opening image!')
+            print('Usage: filter2D.py [image_name -- default lena.jpg] \n')
+            return -1
+
     def event_catch(self):
         self.ui.btn_linear_filter.clicked.connect(
             lambda: self.linear_filter()
@@ -23,13 +28,10 @@ class Task:
         self.ui.btn_paint.clicked.connect(
             lambda: self.dodgeV2()
         )
+
     def linear_filter(self):
-        if self.src is None:
-            print('Error opening image!')
-            print('Usage: filter2D.py [image_name -- default lena.jpg] \n')
-            return -1
         ind = 4
-        kernel_size = 3 + 2 * (ind % 5)
+        kernel_size = 3 + 5 * (ind % 5)
         kernel = np.ones((kernel_size, kernel_size), dtype=np.float32)
         kernel /= (kernel_size * kernel_size)
 

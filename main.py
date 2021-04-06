@@ -92,7 +92,6 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     from task import Task
-    print(sys.argv[1:])
     t = Task(sys.argv[1:], ui)
     controller = t.event_catch()
     sys.exit(app.exec_())
